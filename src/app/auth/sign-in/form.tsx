@@ -95,7 +95,7 @@ export default function SignInForm() {
   }, []);
 
   return (
-    <div className=" w-full h-fit overflow-y-scroll max-w-md rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-8 flex flex-col gap-6">
+    <div className=" w-full h-fit overflow-y-auto max-w-md rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-8 flex flex-col gap-6">
       <section>
         <h1 className="text-3xl font-semibold">Welcome Back!</h1>
         <p className="text-sm mt-1 dark:text-gray-400">Jump back in.</p>

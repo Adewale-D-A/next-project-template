@@ -26,7 +26,7 @@ export default async function DashboardLayout({
           </header>
 
           {/* Page Content */}
-          <main className=" bg-white h-full rounded-b-lg overflow-y-scroll w-full">
+          <main className=" bg-white h-full rounded-b-lg overflow-y-auto w-full">
             <div className=" w-full flex justify-center">{children}</div>
           </main>
         </div>

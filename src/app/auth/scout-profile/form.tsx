@@ -96,7 +96,7 @@ export default function ScoutProfileForm() {
   );
 
   return (
-    <div className=" w-full h-fit lg:h-full overflow-y-scroll max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
+    <div className=" w-full h-fit lg:h-full overflow-y-auto max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
       <h6 className=" font-bold text-gray-500 text-xl">ISPORTS</h6>
       <section>
         <h1 className="text-3xl font-semibold">
