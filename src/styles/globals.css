@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #d1f462;
+  --color-primary-dull: #465712;
+  --color-dark-ash-900: #0a0a09;
+  --color-dark-ash-700: #1e1e1d;
+  --color-dark-ash-500: #454544;
+  --color-destructive: red
+}
+.text-shadow {
+  text-shadow: 0px 4px 4px rgba(61, 61, 61, 0.5);
+}
+
+.toggle-input:checked + .slider {
+  background-color: #0a0a09;
+}
+
+.toggle-input:focus + .slider {
+  box-shadow: 0 0 1px #0a0a09;
+}
+
+.toggle-input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.slider:before {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.backgrop-bg-filter {
+  background-color: rgb(209, 244, 98, 0.1);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
