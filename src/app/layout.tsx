@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
+import StoreProvider from "@/provider/store-provider";
+import AlertModal from "@/components/infoModal/alert-modal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -45,7 +47,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased w-full`}>{children}</body>
+      <body className={`${inter.variable} antialiased w-full`}>
+        <StoreProvider>
+          <>
+            {children}
+            {/* info alert modal */}
+            <AlertModal />
+          </>
+        </StoreProvider>
+      </body>
     </html>
   );
 }

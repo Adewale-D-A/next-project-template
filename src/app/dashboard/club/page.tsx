@@ -1,31 +1,15 @@
 "use client";
 
-// import { Button } from "@/components/button";
 import CompetitionsCard from "@/components/cards/competitions";
 import StatsCard from "@/components/cards/stats";
 import Loader from "@/components/loader";
-// import { useAppDispatch } from "@/hooks/store-hooks";
-// import { openInfobar } from "@/stores/features/app-native-features/info-modal";
-// import { useCallback } from "react";
 
 export default function DashboardHome() {
-  // const dispatch = useAppDispatch();
-  // const openInfoBar = useCallback(() => {
-  //   dispatch(
-  //     openInfobar({
-  //       message: "Please try again later",
-  //       isError: true,
-  //     })
-  //   );
-  // }, []);
-
   return (
     <div className=" w-full flex flex-col gap-5">
       {/* upcoming match and fixtures */}
       <section className=" w-full flex flex-col md:flex-row gap-4 items-stretch h-full">
-        <div className=" w-full flex-3/5 min-h-96 bg-gray-200 rounded-xl">
-          {/* <Button onClick={() => openInfoBar()}>Open Message</Button> */}
-        </div>
+        <div className=" w-full flex-3/5 min-h-96 bg-gray-200 rounded-xl"></div>
         <div className=" w-full flex-2/5 min-h-32  bg-gray-300 rounded-xl"></div>
       </section>
 

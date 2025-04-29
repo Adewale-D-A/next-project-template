@@ -1,7 +1,13 @@
 import { useCallback } from "react";
 import { Button } from "../button";
 import { Trash } from "lucide-react";
-import ModalTemplate from "./template";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/dialog";
 
 export default function DeleteConfirmation({
   open,
@@ -29,27 +35,35 @@ export default function DeleteConfirmation({
   }, [confirmationHandler]);
 
   return (
-    <ModalTemplate open={open} setOpen={setOpen} className=" max-w-md">
-      <div className={` w-full flex items-center flex-col gap-8 my-6`}>
-        <Trash className=" text-red-500 h-24 w-24" />
-        <div className=" w-ful flex flex-col gap-2 text-center">
-          <h4 className={`font-semibold text-lg text-[#101828]`}>{title}</h4>
+    <Dialog open={open} onOpenChange={() => closeModal()}>
+      <DialogContent className="w-full max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="headline-md-b">{title}</DialogTitle>
+        </DialogHeader>
+        <div className={` w-full flex items-center flex-col gap-8 my-6`}>
+          <Trash className=" text-red-500 h-24 w-24" />
           <p className=" text-sm font-normal text-[#475467]">{description}</p>
+
+          <DialogFooter className=" flex items-center gap-3">
+            <Button
+              type="button"
+              disabled={false}
+              onClick={() => handleConfirmationFunction()}
+              className=" w-fit px-5"
+            >
+              {btnTitle}
+            </Button>
+            <Button
+              type="button"
+              disabled={false}
+              onClick={() => closeModal()}
+              className=" w-fit px-5"
+            >
+              No, Cancel
+            </Button>
+          </DialogFooter>
         </div>
-        <div className=" flex items-center gap-3">
-          <Button
-            type="button"
-            disabled={false}
-            onClick={() => handleConfirmationFunction()}
-            className=" bg-red-200 text-red-500 whitespace-nowrap hover:bg-primary hover:text-white"
-          >
-            {btnTitle}
-          </Button>
-          <Button type="button" disabled={false} onClick={() => closeModal()}>
-            No, Cancel
-          </Button>
-        </div>
-      </div>
-    </ModalTemplate>
+      </DialogContent>
+    </Dialog>
   );
 }

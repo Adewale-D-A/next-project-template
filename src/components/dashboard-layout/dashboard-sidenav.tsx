@@ -17,7 +17,6 @@ import { Logo } from "../logo";
 import { useAppDispatch, useAppSelector } from "@/hooks/store-hooks";
 import ToggleNavMenuButton from "./toggle-menu-button";
 import { toggleMenuView } from "@/stores/features/app-native-features/nav-menu";
-import AlertModal from "../infoModal/alert-modal";
 
 const ROUTES = {
   club: [
@@ -90,7 +89,6 @@ const ROUTES = {
 
 export const DashboardSideNav = ({ role }: { role: "club" | "scout" }) => {
   const dispatch = useAppDispatch();
-  // const { show } = useAppSelector((state) => state.infoBar.value);
 
   //get status of side menu from redux store
   const fullView = useAppSelector(
@@ -100,51 +98,48 @@ export const DashboardSideNav = ({ role }: { role: "club" | "scout" }) => {
     dispatch(toggleMenuView());
   }, []);
   return (
-    <>
-      <div>
-        <div
-          className={cn(
-            `dark:bg-dark-ash-900 bg-white h-full overflow-y-auto py-8  flex flex-col transition-width duration-200 z-20 dark:border-r-0 border-r border-gray-200`,
-            fullView
-              ? "fixed md:static top-0 left-0 md:w-64 rounded-r-lg md:rounded-r-none"
-              : "hidden md:flex md:w-10"
-          )}
-        >
-          <div className="flex items-center justify-between p-4">
-            <Logo />
-          </div>
-
-          <nav
-            className={cn(
-              "mt-8 flex-grow flex flex-col gap-10 sm:gap-6",
-              fullView ? "" : "gap-10"
-            )}
-          >
-            {ROUTES[role].map((route) => (
-              <NavLink key={route.href} {...route} isMinimized={!fullView} />
-            ))}
-          </nav>
-
-          <div
-            className={cn(
-              "flex justify-between flex-col gap-4",
-              fullView ? "sm:flex-row" : "flex-col-reverse"
-            )}
-          >
-            {/* {fullView && <ThemeModeToggle />} */}
-            <ToggleNavMenuButton />
-          </div>
+    <div>
+      <div
+        className={cn(
+          `dark:bg-dark-ash-900 bg-white h-full overflow-y-auto py-8  flex flex-col transition-width duration-200 z-20 dark:border-r-0 border-r border-gray-200`,
+          fullView
+            ? "fixed md:static top-0 left-0 md:w-64 rounded-r-lg md:rounded-r-none"
+            : "hidden md:flex md:w-10"
+        )}
+      >
+        <div className="flex items-center justify-between p-4">
+          <Logo />
         </div>
 
-        {fullView && (
-          <div
-            className=" fixed top-0 right-0 w-full h-full z-[18] block md:hidden  backgrop-bg-filter"
-            onClick={() => toggleMenu()}
-          ></div>
-        )}
+        <nav
+          className={cn(
+            "mt-8 flex-grow flex flex-col gap-10 sm:gap-6",
+            fullView ? "" : "gap-10"
+          )}
+        >
+          {ROUTES[role].map((route) => (
+            <NavLink key={route.href} {...route} isMinimized={!fullView} />
+          ))}
+        </nav>
+
+        <div
+          className={cn(
+            "flex justify-between flex-col gap-4",
+            fullView ? "sm:flex-row" : "flex-col-reverse"
+          )}
+        >
+          {/* {fullView && <ThemeModeToggle />} */}
+          <ToggleNavMenuButton />
+        </div>
       </div>
-      {/* <AlertModal openModal={show} /> */}
-    </>
+
+      {fullView && (
+        <div
+          className=" fixed top-0 right-0 w-full h-full z-[18] block md:hidden  backgrop-bg-filter"
+          onClick={() => toggleMenu()}
+        ></div>
+      )}
+    </div>
   );
 };
 

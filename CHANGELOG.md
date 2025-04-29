@@ -1,3 +1,9 @@
+##### 29.04.2025
+
+> Feature: Modal setup completion
+> Alert modal main layout additiob
+> Store provider main layout wrapper
+
 ##### 28.04.2025
 
 > Modal stup initialization (not completed due to deployment urgency)
