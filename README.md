@@ -64,3 +64,10 @@ step 2:
 run **npm run dev** (start application on port:3000)
 
 [FRONTEND LIVE URL](https://adewale-d-a.com/)
+
+```
+Login User 1 : club@io.com
+Password : Club123
+Login User 2 : scout@io.com
+Password : Scout123
+```
