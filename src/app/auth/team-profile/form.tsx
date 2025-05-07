@@ -91,7 +91,7 @@ export default function TeamProfileForm() {
 
   return (
     <div className=" w-full h-full overflow-y-scroll max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
-      <h6 className=" font-bold text-gray-500 text-xl">AAD</h6>
+      <h6 className=" font-bold text-gray-500 text-xl">ISPORTS</h6>
       <section>
         <h1 className="text-3xl font-semibold">
           Create your team&apos;s profile
@@ -165,7 +165,7 @@ export default function TeamProfileForm() {
             name="logo"
             render={({ field: { onChange, onBlur, name, ref } }) => (
               <FormItem className="w-full flex flex-col gap-1">
-                <FormLabel>A Logo</FormLabel>
+                <FormLabel>Club Logo</FormLabel>
                 <p className=" text-sm text-gray-500 dark:text-white">
                   This can be PNG, PSD or JPEG but MUST have a transparent
                   background.

@@ -9,6 +9,9 @@ import navMenuProperties from "./features/app-native-features/nav-menu";
 import pageProperties from "./features/app-native-features/page-properties";
 //native app features
 
+// services
+import playersListData from "./features/services/players-list";
+
 export const premiumStore = () => {
   return configureStore({
     reducer: {
@@ -19,6 +22,9 @@ export const premiumStore = () => {
       infoBar: infoBar,
       navMenuProperties: navMenuProperties,
       pageProperties: pageProperties,
+
+      // services
+      players: playersListData,
     },
   });
 };

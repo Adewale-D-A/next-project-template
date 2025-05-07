@@ -1,11 +1,16 @@
 {
   "id": "random_id",
-  "first_name": "First",
-  "last_name": "Last",
-  "position": "****",
+  "first_name": "Chima",
+  "last_name": "Ojukwu",
+  "position": "Midfielder",
   "goals": 4,
   "assist": 4,
   "distance": 12.4,
   "speed": 32.8,
-  "profile_img": "/logo.jpg"
+  "profile_img": "/logo.jpg",
+  "jersey": 1,
+  "ability": 4,
+  "status": "injured",
+  "added": "2024-09-22T12:22:27.000000Z",
+  "last_activity": "2024-09-22T12:22:27.000000Z"
 }

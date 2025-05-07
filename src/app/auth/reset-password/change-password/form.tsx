@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/button";
 import { Form } from "@/components/_shared/form/form";
 import {
@@ -47,9 +47,6 @@ export default function ChangePasswordForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    console.log(email);
-  }, [email]);
   const changePassword = useCallback(
     async (data: ResetPasswordType) => {
       if (data?.password === data?.confirm_password) {
