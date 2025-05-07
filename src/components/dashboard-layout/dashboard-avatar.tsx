@@ -16,10 +16,7 @@ export default function DashboardAvatar() {
 
   const doSignOut = async () => {
     try {
-      const origin =
-        typeof window !== "undefined" && window.location.origin
-          ? window.location.origin
-          : "";
+      // ALERT: Internal API call!
       await axios.delete(`${origin}/api/auth/delete-cookie`);
       signOutClient();
       return router.push("/auth/sign-in");

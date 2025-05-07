@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import axios from "axios";
-import { CheckCircle2, Loader2, MapPin } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import NoAddressResult from "@/components/no-address-result";
 import { Input } from "./text-input";
 
@@ -43,12 +43,14 @@ export interface AutocompleteProps extends ComponentProps<typeof Input> {
   value?: string;
   onPlaceChanged: (place: string) => void;
   setCoordinates?: (coords: coords) => void;
+  applyTheme?: boolean;
 }
 
 export const AutocompleteInput = ({
   onPlaceChanged,
   setCoordinates,
   value,
+  applyTheme = true,
 }: AutocompleteProps) => {
   const ref = useRef(null) as any;
 
@@ -56,7 +58,6 @@ export const AutocompleteInput = ({
   const [isMenuDocked, setIsMenuDocked] = useState(true);
   const [keywords, setKeywords] = useState("");
   const [result, setResult] = useState<autocompleteResult[]>([]);
-  const [coords, setCoords] = useState<coords>({} as any);
   // logic to close referenced container when clicked outsite the element
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, false);
@@ -79,14 +80,11 @@ export const AutocompleteInput = ({
     async (event: ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
       setKeywords(value);
-      const origin =
-        typeof window !== "undefined" && window.location.origin
-          ? window.location.origin
-          : "";
       setLoading(true);
       try {
+        // ALERT: Internal API call!
         const response = await axios.get(
-          `${origin}/api/maps/autocomplete?input=${value}`
+          `/api/maps/autocomplete?input=${value}`
         );
         const data = response?.data?.data;
         setResult(data);
@@ -101,21 +99,14 @@ export const AutocompleteInput = ({
 
   const onLocationClick = useCallback(
     async (location: string, placeId: string) => {
-      const origin =
-        typeof window !== "undefined" && window.location.origin
-          ? window.location.origin
-          : "";
       setLoading(true);
       try {
+        // ALERT: Internal API call!
         const geometryResponse = await axios.get(
-          `${origin}/api/maps/place-geometry?placeId=${placeId}`
+          `/api/maps/place-geometry?placeId=${placeId}`
         );
         const { lat, lng } = geometryResponse?.data?.data;
         setCoordinates?.({
-          latitude: lat,
-          longitude: lng,
-        });
-        setCoords({
           latitude: lat,
           longitude: lng,
         });
@@ -138,19 +129,11 @@ export const AutocompleteInput = ({
             <Loader2 className="custom-spin h-4 w-4 text-primary" />
           </div>
         )}
-        {!loading && (
-          <div className=" absolute inset-y-0 right-0 flex items-center pr-4">
-            <CheckCircle2
-              className={`w-4 h-4 transition-all ${
-                coords?.latitude ? " text-green-500" : " text-gray-300"
-              }`}
-            />
-          </div>
-        )}
         <Input
           value={keywords}
           onChange={(e) => handleAutocomplete(e)}
           placeholder="Select Location"
+          applyTheme={applyTheme}
         />
       </div>
       {!isMenuDocked && (

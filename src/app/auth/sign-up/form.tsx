@@ -17,6 +17,8 @@ import { Form } from "@/components/_shared/form/form";
 import { useRouter } from "next/navigation";
 import { MoveRight } from "lucide-react";
 import { passwordSchema } from "@/lib/schema";
+import { useAppDispatch } from "@/hooks/store-hooks";
+import { updateUser } from "@/stores/features/auth/auth";
 
 const SignUpSchema = z.object({
   email: z.string().email().min(1, {
@@ -30,6 +32,7 @@ type SignUpType = z.infer<typeof SignUpSchema>;
 
 export default function SignUpForm() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const form = useForm<SignUpType>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -39,7 +42,7 @@ export default function SignUpForm() {
   });
 
   const handleSubmit = useCallback((data: SignUpType) => {
-    console.log(data);
+    dispatch(updateUser({ ...data }));
     router.push("/auth/role");
   }, []);
 

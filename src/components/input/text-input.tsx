@@ -8,10 +8,14 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  applyTheme?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, leftIcon, rightIcon, ...props }, ref) => {
+  (
+    { className, type, leftIcon, rightIcon, applyTheme = true, ...props },
+    ref
+  ) => {
     const [showPwd, setShowPwd] = React.useState(false);
     return (
       <div className="relative w-full">
@@ -37,8 +41,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={showPwd ? "text" : type}
           className={cn(
-            "flex h-10 w-full shadow-none dark:border-none dark:bg-dark-ash-700  dark:text-white dark:placeholder:text-dark-ash-500 rounded-md border border-gray-200  placeholder:text-gray-300  bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-            className
+            "flex h-10 w-full shadow-none rounded-md border border-gray-200  placeholder:text-gray-300  bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            applyTheme &&
+              "dark:bg-dark-ash-700 dark:border-none dark:text-white dark:placeholder:text-dark-ash-500",
+            className,
+            leftIcon && "pl-12",
+            rightIcon && "pr-12"
           )}
           ref={ref}
           {...props}

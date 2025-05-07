@@ -4,14 +4,9 @@ import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store-hooks";
 import { closeInfoBar } from "@/stores/features/app-native-features/info-modal";
 import { CheckCircle, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/dialog";
 import { cn } from "@/shared/_utils/cn";
 import { Button } from "../button";
+import ModalTemplate from "../dialog";
 
 const AlertModal = () => {
   const dispatch = useAppDispatch();
@@ -23,38 +18,33 @@ const AlertModal = () => {
   }, []);
 
   return (
-    <Dialog open={show} onOpenChange={() => closeModal()}>
-      <DialogContent className="w-full max-w-2xl">
-        <DialogHeader>
-          <DialogTitle className="headline-md-b"></DialogTitle>
-        </DialogHeader>
-        <div
-          className={cn(
-            "w-full flex items-center flex-col gap-5",
-            isError && "text-red-500",
-            !isError && "text-green-500"
-          )}
-        >
-          {isError ? (
-            <X className="w-24 h-24" />
-          ) : (
-            <CheckCircle className="w-24 h-24" />
-          )}
+    <ModalTemplate open={show} onClose={closeModal}>
+      <div
+        className={cn(
+          "w-full flex items-center flex-col gap-5",
+          isError && "text-red-500",
+          !isError && "text-green-500"
+        )}
+      >
+        {isError ? (
+          <X className="w-24 h-24" />
+        ) : (
+          <CheckCircle className="w-24 h-24" />
+        )}
 
-          <h4 className={`font-semibold text-3xl`}>
-            {isError ? "Error" : "Success"}
-          </h4>
-          <p className=" text-sm">{message}</p>
-          <Button
-            type="button"
-            onClick={() => closeModal()}
-            className="w-fit px-5"
-          >
-            Okay
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+        <h4 className={`font-semibold text-3xl`}>
+          {isError ? "Error" : "Success"}
+        </h4>
+        <p className=" text-sm">{message}</p>
+        <Button
+          type="button"
+          onClick={() => closeModal()}
+          className="w-fit px-5"
+        >
+          Okay
+        </Button>
+      </div>
+    </ModalTemplate>
   );
 };
 

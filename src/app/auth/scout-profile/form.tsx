@@ -30,6 +30,7 @@ import {
 } from "@/components/input/select";
 
 import countries from "@/shared/_utils/countries";
+import { useAppSelector } from "@/hooks/store-hooks";
 const ScoutProfileSchema = z.object({
   first_name: z.string({
     message: "First name is required.",
@@ -69,6 +70,7 @@ type ScountProfileType = z.infer<typeof ScoutProfileSchema>;
 
 export default function ScoutProfileForm() {
   const router = useRouter();
+  const user = useAppSelector((state) => state?.auth?.value?.user);
   const [coordinates, setCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -89,15 +91,27 @@ export default function ScoutProfileForm() {
 
   const handleSubmit = useCallback(
     (data: ScountProfileType) => {
-      console.log({ ...data, coordinates });
+      console.log({ ...data, coordinates, user });
+      const payload = {
+        email: user?.email,
+        password: user?.password,
+        role: "scout",
+        phoneNumber: data?.phone,
+        image: data?.photo,
+        country: data?.country,
+        firstName: data?.first_name,
+        lastName: data?.last_name,
+        // dob: "", //NOT EXPECTED
+        // gender: "", //NOT EXPECTED
+      };
       router.push("/auth/sign-in");
     },
-    [coordinates]
+    [coordinates, user]
   );
 
   return (
     <div className=" w-full h-fit lg:h-full overflow-y-auto max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
-      <h6 className=" font-bold text-gray-500 text-xl">ISPORTS</h6>
+      <h6 className=" font-bold text-gray-500 text-xl">AAD</h6>
       <section>
         <h1 className="text-3xl font-semibold">
           Create your team&apos;s profile
@@ -117,7 +131,7 @@ export default function ScoutProfileForm() {
             render={({ field: { onChange, onBlur, name, ref } }) => (
               <FormItem className="w-full flex gap-3 items-center">
                 <Image
-                  src={"/logo.jpg"}
+                  src={"/logo.png"}
                   alt="picture"
                   height={200}
                   width={200}
@@ -205,9 +219,7 @@ export default function ScoutProfileForm() {
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger
-                      className={`rounded border border-[#E5E5E7] bg-[#F8F9FB] text-sm py-[14px] px-4 placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:ring-offset-gray-950 dark:placeholder:text-gray-400 dark:focus-visible:ring-gray-300`}
-                    >
+                    <SelectTrigger>
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                   </FormControl>
@@ -300,9 +312,7 @@ export default function ScoutProfileForm() {
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger
-                      className={`rounded border border-[#E5E5E7] bg-[#F8F9FB] text-sm py-[14px] px-4 placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:ring-offset-gray-950 dark:placeholder:text-gray-400 dark:focus-visible:ring-gray-300`}
-                    >
+                    <SelectTrigger>
                       <SelectValue placeholder="Select organization type" />
                     </SelectTrigger>
                   </FormControl>

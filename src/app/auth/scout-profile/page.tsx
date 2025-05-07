@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function ScoutProfile() {
   return (
-    <div className=" w-full h-full flex justify-center items-center lg:justify-end lg:py-4 lg:pr-4 ">
+    <div className=" w-full h-screen flex justify-center items-center lg:justify-end lg:py-4 lg:pr-4 ">
       <ScoutProfileForm />
     </div>
   );

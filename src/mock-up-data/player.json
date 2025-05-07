@@ -1,0 +1,11 @@
+{
+  "id": "random_id",
+  "first_name": "First",
+  "last_name": "Last",
+  "position": "****",
+  "goals": 4,
+  "assist": 4,
+  "distance": 12.4,
+  "speed": 32.8,
+  "profile_img": "/logo.jpg"
+}

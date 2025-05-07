@@ -1,119 +1,99 @@
-"use client";
-
-import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
 import { cn } from "@/shared/_utils/cn";
+import { ReactNode, useCallback, useEffect } from "react";
+import { Button } from "../button";
+import { X } from "lucide-react";
+import { cva } from "class-variance-authority";
 
-const Dialog = DialogPrimitive.Root;
+const backdropUniqueTitle = "modal-backdrop";
 
-const DialogTrigger = DialogPrimitive.Trigger;
+const modalVariants = cva(
+  " w-full transition-all  fixed z-50 top-0 left-0 backgrop-bg-filter max-h-screen h-full flex items-center",
+  {
+    variants: {
+      variant: {
+        default: " justify-center",
+        alignRight: "justify-end",
+        alignLeft: "justify-end",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
 
-const DialogPortal = DialogPrimitive.Portal;
+export default function ModalTemplate({
+  open,
+  onClose,
+  title,
+  children,
+  className,
+  variant,
+}: {
+  open: boolean;
+  onClose: (val: boolean) => void;
+  title?: string;
+  children: ReactNode;
+  className?: string;
+  variant?: "default" | "alignRight" | "alignLeft";
+}) {
+  // simple useEffect to capture ESC key to close the modal
+  const handleClose = useCallback(() => {
+    onClose?.(false);
+  }, [onClose]);
 
-const DialogClose = DialogPrimitive.Close;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) {
+        handleClose?.();
+      }
+    };
 
-const DialogOverlay = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-[#000]/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
-    )}
-    {...props}
-  />
-));
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, handleClose]);
 
-const DialogContent = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      aria-describedby={undefined}
-      ref={ref}
-      className={cn(
-        "fixed bg-white h-fit max-h-[calc(100vh-150px)] overflow-y-auto left-[50%] top-[50%] z-50 grid w-[90%] max-w-[400px] translate-x-[-50%] translate-y-[-50%] gap-4 p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-lg",
-        className
-      )}
-      {...props}
+  const handleClickOutside = useCallback((event: any) => {
+    if (event.target.title === backdropUniqueTitle) {
+      handleClose();
+    }
+  }, []);
+
+  if (!open) return null;
+
+  return (
+    <div
+      onClick={(e) => handleClickOutside(e)}
+      // data-state={open ? "open" : "closed"}
+      className={cn(modalVariants({ variant }))}
+      title={backdropUniqueTitle}
     >
-      {children}
-      <DialogPrimitive.Close className="absolute hover:text-red-500 right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-all hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 data-[state=open]:text-gray-500 dark:ring-offset-gray-950 dark:focus:ring-gray-300 dark:data-[state=open]:bg-gray-800 dark:data-[state=open]:text-gray-400">
-        <X className="h-6 w-6" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-));
-DialogContent.displayName = DialogPrimitive.Content.displayName;
-
-const DialogHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
-      className
-    )}
-    {...props}
-  />
-);
-DialogHeader.displayName = "DialogHeader";
-
-const DialogFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn("flex flex-col sm:flex-row sm:space-x-2", className)}
-    {...props}
-  />
-);
-DialogFooter.displayName = "DialogFooter";
-
-const DialogTitle = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title
-    ref={ref}
-    className={cn(
-      "text-lg md:text-xl font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-));
-DialogTitle.displayName = DialogPrimitive.Title.displayName;
-
-const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description
-    ref={ref}
-    className={cn("text-sm text-gray-300 dark:text-gray-400", className)}
-    {...props}
-  />
-));
-DialogDescription.displayName = DialogPrimitive.Description.displayName;
-
-export {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-};
+      <div
+        title="modal-content"
+        // data-state={open ? "open" : "closed"}
+        className={cn(
+          "w-full max-w-2xl  bg-white dark:bg-dark-ash-900 h-fit max-h-[calc(100vh-100px)] overflow-y-auto p-4 lg:p-6 shadow-lg duration-200  rounded-lg",
+          className,
+          variant === "alignRight" && "max-h-[calc(100vh-10px)]"
+          // "data-[state=open]:w-full data-[state=closed]:w-0 transition-all delay-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]"
+        )}
+      >
+        {/* TITLE */}
+        {title && (
+          <div className="headline-md-b uppercase dark:text-white text-dark-ash-900 font-bold border-b  dark:border-gray-700 border-gray-200 mb-5 pb-3 flex justify-between items-center">
+            <h6 className=" text-xl">{title}</h6>{" "}
+            <Button
+              onClick={() => handleClose()}
+              variant={"unstyled"}
+              size={"icon"}
+              className=" dark:text-red-500 hover:text-red-500 hover:scale-125 transition-all"
+            >
+              <X />
+            </Button>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
+  );
+}

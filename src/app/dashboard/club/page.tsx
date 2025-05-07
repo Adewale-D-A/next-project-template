@@ -1,9 +1,9 @@
-"use client";
+import { Metadata } from "next";
 
-import CompetitionsCard from "@/components/cards/competitions";
-import StatsCard from "@/components/cards/stats";
-import Loader from "@/components/loader";
-
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Your club's dashboard.",
+};
 export default function DashboardHome() {
   return (
     <div className=" w-full flex flex-col gap-5">
@@ -15,102 +15,31 @@ export default function DashboardHome() {
 
       {/* team stats, active competitions and player of the week */}
       <section className=" w-full flex flex-col md:flex-row gap-4 items-stretch h-full">
-        <Loader className="w-full flex-3/5 flex flex-col gap-4">
-          <>
-            <div className=" w-full rounded-xl border border-gray-300 flex flex-col gap-3 p-5">
-              <h6 className=" text-lg font-bold text-gray-400">TEAM STATS</h6>
-              <div className=" grid grid-col-1 md:grid-cols-2 gap-3">
-                {[
-                  {
-                    id: 1,
-                    title: "Goals Scored",
-                    label: "Last 5 games",
-                    value: "4.1",
-                    valueLabel: "Comp avg 2.4",
-                    showIcon: true,
-                  },
-                  {
-                    id: 2,
-                    title: "Goals Conceeded",
-                    label: "Last 5 games",
-                    value: "1.8",
-                    valueLabel: "Comp avg 2.4",
-                    showIcon: true,
-                  },
-                  {
-                    id: 3,
-                    title: "Wins",
-                    label: "Competition",
-                    value: "45%",
-                    valueLabel: "Total: 8 wins",
-                    showIcon: false,
-                    valueColorClassName: "text-[#DDAC0B]",
-                  },
-                  {
-                    id: 4,
-                    title: "Injuries",
-                    label: "",
-                    value: "4",
-                    valueLabel: "avg: 3 weeks",
-                    showIcon: false,
-                    valueColorClassName: "text-black",
-                  },
-                ].map((item) => (
-                  <StatsCard key={item?.id} {...item} />
-                ))}
-              </div>
-            </div>
-            <div className=" w-full h-60 bg-purple-100 rounded-xl"></div>
-          </>
-        </Loader>
-        <Loader className=" w-full flex-2/5 rounded-xl border border-gray-300 p-5 flex flex-col gap-3">
-          <>
-            <h6 className=" text-lg font-bold text-gray-400">
-              ACTIVE COMPETITIONS
-            </h6>
-            <div className=" grid grid-col-1 gap-3">
-              {[
-                {
-                  id: 1,
-                  title: "Regional Youth League",
-                  category: "Senior - 16 Teams",
-                  date: "Apr 17 - Jun 20",
-                  status: "active" as const,
-                },
-                {
-                  id: 2,
-                  title: "Regional Youth League",
-                  category: "Senior - 16 Teams",
-                  date: "Apr 17 - Jun 20",
-                  status: "active" as const,
-                },
-                {
-                  id: 3,
-                  title: "Nations Cup",
-                  category: "u-17 - 16 Teams",
-                  date: "Apr 17 - Jun 20",
-                  status: "active" as const,
-                },
-                {
-                  id: 4,
-                  title: "Regional Youth League",
-                  category: "Senior - 16 Teams",
-                  date: "May 17 - Jun 20",
-                  status: "available" as const,
-                },
-                {
-                  id: 5,
-                  title: "National Championship",
-                  category: "Senior - 36 Teams",
-                  date: "Mar 5 - May 25",
-                  status: "request-sent" as const,
-                },
-              ].map((item) => (
-                <CompetitionsCard key={item?.id} {...item} />
+        <div className=" w-full flex-3/5 flex flex-col gap-4">
+          <div className=" w-full bg-green-100 rounded-xl flex flex-col gap-3 p-5">
+            <h6 className=" text-lg font-bold text-gray-400">*****</h6>
+            <div className=" grid grid-col-1 md:grid-cols-2 gap-3">
+              {[1, 2, 3, 4].map((item) => (
+                <div
+                  key={item}
+                  className=" rounded-md h-28 w-full bg-amber-200"
+                ></div>
               ))}
             </div>
-          </>
-        </Loader>
+          </div>
+          <div className=" w-full h-60 bg-purple-100 rounded-xl"></div>
+        </div>
+        <div className=" w-full flex-2/5 bg-yellow-100 rounded-xl p-5">
+          <h6 className=" text-lg font-bold text-gray-400">*****</h6>
+          <div className=" grid grid-col-1 gap-3">
+            {[1, 2, 3, 4, 5].map((item) => (
+              <div
+                key={item}
+                className=" rounded-lg h-20 w-full bg-blue-100"
+              ></div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

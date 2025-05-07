@@ -1,15 +1,7 @@
 "use client";
 
 import { cn } from "@/shared/_utils/cn";
-import {
-  LucideIcon,
-  Settings,
-  Home,
-  ChartBar,
-  Calendar,
-  Award,
-  User2,
-} from "lucide-react";
+import { LucideIcon, Settings, Home, User2, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -27,24 +19,9 @@ const ROUTES = {
       exact: true,
     },
     {
-      label: "Players Management",
-      href: "/dashboard/club/players-management",
+      label: "...More",
+      href: "/dashboard/club/more",
       icon: User2,
-    },
-    {
-      label: "Competitions",
-      href: "/dashboard/club/competitions",
-      icon: Award,
-    },
-    {
-      label: "Schedule",
-      href: "/dashboard/club/schedule",
-      icon: Calendar,
-    },
-    {
-      label: "Reports",
-      href: "/dashboard/club/reports",
-      icon: ChartBar,
     },
     {
       label: "Settings",
@@ -60,24 +37,9 @@ const ROUTES = {
       exact: true,
     },
     {
-      label: "Players Management",
-      href: "/dashboard/scout/players-management",
-      icon: User2,
-    },
-    {
-      label: "Competitions",
-      href: "/dashboard/scout/competitions",
-      icon: Award,
-    },
-    {
-      label: "Schedule",
-      href: "/dashboard/scout/schedule",
-      icon: Calendar,
-    },
-    {
-      label: "Reports",
-      href: "/dashboard/scout/reports",
-      icon: ChartBar,
+      label: "...More",
+      href: "/dashboard/scout/more",
+      icon: Trophy,
     },
     {
       label: "Settings",

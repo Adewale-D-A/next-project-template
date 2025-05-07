@@ -17,10 +17,10 @@ import { Form } from "@/components/_shared/form/form";
 import { useRouter } from "next/navigation";
 import { MoveRight } from "lucide-react";
 import { passwordSchema } from "@/lib/schema";
-import axios from "axios";
 import storeProfileClient from "@/utils/auth/store-profile-client";
 import storeTokenClient from "@/utils/auth/store-token-client";
-// import useAxiosJson from "@/config/services/axios-json-context";
+import useAxiosJson from "@/config/services/axios-json-context";
+import axios from "axios";
 
 const SignInSchema = z.object({
   email: z.string().email().min(1, {
@@ -32,7 +32,7 @@ const SignInSchema = z.object({
 type SignInType = z.infer<typeof SignInSchema>;
 
 export default function SignInForm() {
-  // const axios = useAxiosJson({});
+  const axiosCustom = useAxiosJson({});
   const router = useRouter();
   const form = useForm<SignInType>({
     resolver: zodResolver(SignInSchema),
@@ -44,18 +44,14 @@ export default function SignInForm() {
 
   const handleSubmit = useCallback(async (data: SignInType) => {
     try {
-      // GET CURRENT ORIGIN
-      const origin =
-        typeof window !== "undefined" && window.location.origin
-          ? window.location.origin
-          : "";
-
       const { email, password } = data;
       // STEP 1: LOGIN USER WITH AUTH CREDENTIALS
-      // const response = await axiosInstance.post("/auth/admin/login", {
+      // const response = await axiosCustom.post("/auth/login", {
       //   email,
       //   password: "password",
       // });
+      // const authUser = await axiosInstance.post("/auth/me");
+      // console.log({ response });
       // const { access_token } = response?.data?.data;
 
       const accessCredentials = {
@@ -63,18 +59,21 @@ export default function SignInForm() {
       };
       // STEP 2: FETCH USER'S PROFILE USING AUTH TOKEN
 
-      // const authUser = await axiosInstance.post("/auth/me");
       const profileCredentials = {
-        id: "raandom_id",
-        role: (email?.includes("club") ? "club" : "scout") as any,
-        role_id: email?.includes("club") ? 1 : (2 as any),
-        first_name: "Adewale",
-        last_name: "Azeez",
+        _id: "raandom_id",
+        firstName: "Adewale",
+        lastName: "Azeez",
         email: "ade_@io.com",
+        phoneNumber: "07056944506",
+        role: {
+          _id: "random_id",
+          name: (email?.includes("club") ? "club" : "scout") as any,
+        },
       };
-
       // STEP 3: PERSIST TOKEN AND PROFILE ON SERVER SIDE COOKIE
-      await axios.post(`${origin}/api/auth/store-cookie`, {
+
+      // ALERT: Internal API call!
+      await axios.post(`/api/auth/store-cookie`, {
         token: accessCredentials,
         profile: profileCredentials,
       });
@@ -84,7 +83,7 @@ export default function SignInForm() {
       storeProfileClient({ profile: profileCredentials });
 
       // STEP 5: REDIRECT USER SAFELY BASED ON ROLE
-      if (profileCredentials?.role === "club") {
+      if (profileCredentials?.role?.name === "club") {
         router.push("/dashboard/club");
       } else {
         router.push("/dashboard/scout");
@@ -142,6 +141,14 @@ export default function SignInForm() {
               </FormItem>
             )}
           />
+          <div className="w-full flex justify-end">
+            <Link
+              href={"/auth/reset-password/send-otp"}
+              className=" dark:text-primary text-black border-b border-dotted dark:border-primary border-black"
+            >
+              Forgot password?
+            </Link>
+          </div>
           <div className=" w-full text-center my-4 flex flex-col gap-2">
             <Button type="submit" className=" flex items-center gap-2">
               Sign In <MoveRight />

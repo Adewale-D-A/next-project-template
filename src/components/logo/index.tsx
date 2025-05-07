@@ -11,10 +11,10 @@ export const Logo = () => {
       )}
     >
       <Image
-        src={"/logo.jpg"}
+        src={"/logo.png"}
         width={200}
         height={200}
-        alt="iSportX logo"
+        alt="AAD logo"
         className="md:w-[80px] w-[50px]"
       />
     </Link>

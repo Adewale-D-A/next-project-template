@@ -1,10 +1,17 @@
 export interface AuthUser {
-  id: string;
-  first_name: string;
-  last_name: string;
+  isDeleted?: boolean;
+  _id: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  role: "club" | "scout";
-  created_at?: string;
-  updated_at?: string;
-  role_id: 1 | 2;
+  phoneNumber: string;
+  role: {
+    _id: string;
+    name: string;
+  };
+  password?: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

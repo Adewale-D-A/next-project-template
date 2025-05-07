@@ -12,7 +12,7 @@ const buttonVariants = cva(
           "bg-primary text-black shadow  w-full text-center border-2 border-primary-dull hover:scale-105",
         urgent: "bg-red-500 border-0 text-white hover:bg-red-500/80",
         file: "bg-white text-gray-900 border border-[#E5E5E7] border-l-0 py-[14px]  md:py-[14px] ",
-        unstyled: "text-gray-900 dark:text-gray-50",
+        unstyled: "text-gray-900 dark:text-dark-ash-900",
       },
       size: {
         default: "text-sm px-2 py-3",

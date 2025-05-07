@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const input = searchParams.get("input") || "";
-    const components = "country:NG"; // Restrict to Nigeria
+    // const components = "country:NG"; // Restrict to Nigeria
 
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/place/autocomplete/json",
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
           // bounds,
           // radius,
           // location,
-          components,
+          // components,
           key: process.env.MAPS_API_KEY,
         },
       }

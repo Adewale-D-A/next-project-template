@@ -1,0 +1,26 @@
+[
+  {
+    "id": "okay_1",
+    "date": "21/04",
+    "league": "H",
+    "club": "Kikcers FC",
+    "result": "completed",
+    "score": "4-1"
+  },
+  {
+    "id": "okay_2",
+    "date": "24/04",
+    "league": "A",
+    "club": "Young Goons FC",
+    "result": "in-progress",
+    "score": "2-1"
+  },
+  {
+    "id": "okay_3",
+    "date": "21/06",
+    "league": "H",
+    "club": "El Carbon",
+    "result": "not-completed",
+    "score": "0-0"
+  }
+]

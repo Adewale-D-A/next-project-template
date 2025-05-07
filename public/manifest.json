@@ -1,6 +1,6 @@
 {
-  "short_name": "iSportX",
-  "name": "iSportX",
+  "short_name": "Adewale-DA",
+  "name": "Adewale's Next App Template",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,5 +22,5 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "description": "Best football scouting and management application."
+  "description": "A NEXT.JS full app template."
 }

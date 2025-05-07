@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { createClient } from "@/lib/supabase/server";
 import axios from "axios";
+// import { createClient } from "@/lib/supabase/server";
 
 export async function GET(req: NextRequest) {
   // const supabase = createClient();
@@ -23,7 +23,6 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-    // console.log({ response, placeId });
     return NextResponse.json(
       { success: true, data: response.data?.result?.geometry?.location },
       { status: 200 }

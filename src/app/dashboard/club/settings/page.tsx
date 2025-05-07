@@ -1,7 +1,20 @@
+import { Metadata } from "next";
+import ChangePasswordForm from "@/app/dashboard/change-password-form";
+import DeleteMyAccount from "@/app/dashboard/delete-account";
+import UpdateClubProfileForm from "./update-profile-form";
+export const metadata: Metadata = {
+  title: "Account Settings",
+  description: "Your account settings.",
+};
+
 export default function Settings() {
   return (
-    <div>
-      <h1 className=" text-center text-4xl font-extrabold">Settings</h1>
+    <div className="w-full flex flex-col items-center gap-3 ">
+      <div className="w-full max-w-3xl">
+        <UpdateClubProfileForm />
+        <ChangePasswordForm />
+        <DeleteMyAccount />
+      </div>
     </div>
   );
 }

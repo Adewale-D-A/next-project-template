@@ -1,4 +1,15 @@
-# iSportX Talent App (User Facing)
+# AAD NEXT.js Full-App Template
+
+> This is a NEXT.js full application template which contains
+
+- A basic layout
+- Dark mode and Light mode theme support
+- A navigation menu
+- Dual user-types interface supports
+- Complete onboarding process, logic and UI developed
+- Route level navigation security support
+- User settings page layout UI and logic support
+- Basic components such as input, modal, menu-action, table etc support
 
 ### <b>prerequisite</b>:
 
@@ -52,8 +63,4 @@ run **yarn install** (to install all the dependencies)
 step 2:
 run **npm run dev** (start application on port:3000)
 
-[UI PROTOTYPE](https://www.figma.com/design/qcAj0PlmDuclqnv0D4JKqR/IXSPORTS?m=auto&t=iHZ6ZTbgNjRH2ZdZ-1)
-
-[LIVE BACKEND API DOC](https://documenter.getpostman.com/view/12370929/2sB2cXAMmA)
-
-[FRONTEND LIVE URL]()
+[FRONTEND LIVE URL](https://adewale-d-a.com/)

@@ -5,10 +5,10 @@ import signOutServer from "./utils/auth/sign-out-server";
 export async function middleware(request: NextRequest) {
   const profile = await extractProfileServer();
   const redirectUrl = request.nextUrl.clone();
-  const isLoggedIn = Boolean(profile?.id);
-  const userRole = profile?.role;
-  const isClubRole = Boolean(profile?.role === "club");
-  const isScoutRole = Boolean(profile?.role === "scout");
+  const isLoggedIn = Boolean(profile?._id);
+  const userRole = profile?.role?.name;
+  const isClubRole = Boolean(profile?.role?.name === "club");
+  const isScoutRole = Boolean(profile?.role?.name === "scout");
 
   function reRouteAppropriately() {
     if (userRole === "club") {

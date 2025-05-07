@@ -19,6 +19,8 @@ import { phoneNumberSchema } from "@/lib/schema";
 import { AutocompleteInput } from "@/components/input/autocompleteInput";
 import FileInput from "@/components/input/file-input-w-button";
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from "@/config/system/constants";
+import { useAppSelector } from "@/hooks/store-hooks";
+import useAxiosMultipart from "@/config/services/axios-multipart-context";
 
 const TeamProfileSchema = z.object({
   name: z.string({
@@ -45,7 +47,9 @@ const TeamProfileSchema = z.object({
 type TeamProfileType = z.infer<typeof TeamProfileSchema>;
 
 export default function TeamProfileForm() {
+  const axios = useAxiosMultipart({});
   const router = useRouter();
+  const user = useAppSelector((state) => state?.auth?.value?.user);
   const [coordinates, setCoordinates] = useState<{
     latitude: number;
     longitude: number;
@@ -61,16 +65,33 @@ export default function TeamProfileForm() {
   });
 
   const handleSubmit = useCallback(
-    (data: TeamProfileType) => {
-      console.log({ ...data, coordinates });
-      router.push("/auth/sign-in");
+    async (data: TeamProfileType) => {
+      console.log({ ...data, coordinates, user });
+      const payload = {
+        // teamName: data?.name,
+        // location: data?.location,
+        email: user?.email,
+        password: user?.password,
+        role: "club",
+        phoneNumber: data?.phone,
+        image: data?.logo,
+        country: data?.location?.split(" ")?.at(-1),
+
+        firstName: data?.name, //NOT EXPECTED
+        lastName: data?.name, //NOT EXPECTED
+        // dob: "", //NOT EXPECTED
+        // gender: "", //NOT EXPECTED
+      };
+      const response = await axios.post("/club", payload);
+      console.log({ response });
+      // router.push("/auth/sign-in");
     },
-    [coordinates]
+    [coordinates, user]
   );
 
   return (
     <div className=" w-full h-full overflow-y-scroll max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
-      <h6 className=" font-bold text-gray-500 text-xl">ISPORTS</h6>
+      <h6 className=" font-bold text-gray-500 text-xl">AAD</h6>
       <section>
         <h1 className="text-3xl font-semibold">
           Create your team&apos;s profile
@@ -144,7 +165,7 @@ export default function TeamProfileForm() {
             name="logo"
             render={({ field: { onChange, onBlur, name, ref } }) => (
               <FormItem className="w-full flex flex-col gap-1">
-                <FormLabel>Club Logo</FormLabel>
+                <FormLabel>A Logo</FormLabel>
                 <p className=" text-sm text-gray-500 dark:text-white">
                   This can be PNG, PSD or JPEG but MUST have a transparent
                   background.

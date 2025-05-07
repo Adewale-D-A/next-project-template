@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { MoveRight, Shield, User } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/input/radio-group";
 import { cn } from "@/shared/_utils/cn";
+import { useAppDispatch } from "@/hooks/store-hooks";
+import { updateUser } from "@/stores/features/auth/auth";
 
 const RoleSchema = z.object({
   role: z.string({
@@ -25,15 +27,23 @@ type RoleType = z.infer<typeof RoleSchema>;
 
 export default function RoleForm() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const form = useForm<RoleType>({
     resolver: zodResolver(RoleSchema),
     defaultValues: {
-      role: "scout",
+      role: "club",
     },
   });
 
   const handleSubmit = useCallback((data: RoleType) => {
-    console.log(data);
+    dispatch(
+      updateUser({
+        role: {
+          id: data.role,
+          role: data.role,
+        },
+      })
+    );
     if (data?.role === "club") {
       router.push("/auth/team-profile");
     } else {
@@ -43,7 +53,7 @@ export default function RoleForm() {
 
   return (
     <div className=" w-full h-full overflow-y-auto max-w-3xl rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-3 lg:p-8 flex flex-col gap-6">
-      <h6 className=" font-bold text-gray-500 text-xl">ISPORTS</h6>
+      <h6 className=" font-bold text-gray-500 text-xl">AAD</h6>
       <section>
         <h1 className="text-3xl font-semibold">Select Your Role!</h1>
         <p className="text-sm mt-1 dark:text-gray-400">
@@ -69,14 +79,14 @@ export default function RoleForm() {
                   <div className="flex flex-col gap-5 items-stretch">
                     {[
                       {
-                        label: "Club",
+                        label: "ROLE A",
                         value: "club",
                         description:
                           "Manage the team, register players, Compete with other teams.",
                         icon: <Shield />,
                       },
                       {
-                        label: "Scout",
+                        label: "ROLE B",
                         value: "scout",
                         description:
                           "Discover talents, create reports, track player development",
