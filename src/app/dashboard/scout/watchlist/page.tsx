@@ -1,28 +1,25 @@
-import PlayerCard from "@/components/cards/player";
+"use client";
+import PlayerStats from "@/components/cards/player-stat";
+import SearchAndFilter from "@/components/filter/search-filter";
+import Loader from "@/components/loader";
+import useGetWatchlist from "@/hooks/services/scout/useGetWatchlist";
 
 export default function Watchlist() {
+  const { data, isLoading, isFailed, setIsFailed, retry, pagination } =
+    useGetWatchlist({});
   return (
-    <div>
-      <div className=" grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {[
-          {
-            first_name: "Price",
-            last_name: "Ugochukwu",
-            position: "Midfielder",
-            rating: "4.5",
-            profile_image: "/logo.jpg",
-          },
-          {
-            first_name: "James",
-            last_name: "Montgomery",
-            position: "Midfielder",
-            rating: "2.5",
-            profile_image: "/logo.jpg",
-          },
-        ].map((item) => (
-          <PlayerCard key={item?.first_name} {...item} />
+    <div className=" flex flex-col gap-5">
+      <SearchAndFilter />
+      <Loader
+        {...{ isLoading, isFailed, setIsFailed, retry }}
+        className=" grid grid-col-1 gap-5"
+      >
+        {data.map((item) => (
+          <div key={item?._id} className=" border border-gray-100 p-5 shadow">
+            <PlayerStats player={item} usertype="scout" variant={2} />
+          </div>
         ))}
-      </div>
+      </Loader>
     </div>
   );
 }

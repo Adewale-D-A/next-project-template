@@ -1,22 +1,28 @@
 import React, { forwardRef, useState, ChangeEvent, useCallback } from "react";
 import { PlusIcon, X } from "lucide-react";
-import { Input } from "./text-input";
 import { Button } from "../button";
-
+import { ACCEPTED_FILE_TYPES_INPUT } from "@/config/system/constants";
 interface FileInputProps {
   onChange: (file: File | null) => void;
   onBlur: () => void;
   name: string;
   placeholder?: string;
+  fileType?: string;
 }
 
 const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
-  ({ onChange, onBlur, name, placeholder = "Upload" }, ref) => {
+  (
+    { onChange, onBlur, name, placeholder = "Upload", fileType = "images" },
+    ref
+  ) => {
     const [fileName, setFileName] = useState<string>("");
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0] || null;
       if (file) {
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        });
         setFileName(file.name);
         onChange(file);
       }
@@ -67,7 +73,10 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           name="file-upload"
           id="file-upload"
           className="hidden"
-          accept="image/*,application/pdf"
+          accept={
+            ACCEPTED_FILE_TYPES_INPUT.find((item) => item?.name === fileType)
+              ?.values || "image/*,application/pdf"
+          }
           onChange={handleFileChange}
           onBlur={onBlur}
         />

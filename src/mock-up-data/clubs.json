@@ -1,0 +1,22 @@
+{
+  "clubs_list": [
+    {
+      "_id": "one",
+      "name": "Max FC",
+      "logo": "/images/kickers_club_logo.png",
+      "phoneNumber": "+234705987156",
+      "wins": 1,
+      "losses": 2,
+      "players_count": 26
+    },
+    {
+      "_id": "two",
+      "name": "Premium Club",
+      "logo": "/images/football_club_logo.png",
+      "phoneNumber": "+2348294231614",
+      "wins": 3,
+      "losses": 1,
+      "players_count": 30
+    }
+  ]
+}

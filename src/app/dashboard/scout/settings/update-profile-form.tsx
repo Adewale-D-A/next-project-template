@@ -2,7 +2,7 @@
 
 import useAxiosJson from "@/config/services/axios-json-context";
 import { useAppDispatch, useAppSelector } from "@/hooks/store-hooks";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/button";
@@ -17,8 +17,7 @@ import { Input } from "@/components/input/text-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/_shared/form/form";
 import FileInput from "@/components/input/file-input-w-button";
-import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from "@/config/system/constants";
-import { phoneNumberSchema } from "@/lib/schema";
+import { imageFileUpload, phoneNumberSchema } from "@/lib/schema";
 import Image from "next/image";
 import { RadioGroup, RadioGroupItem } from "@/components/input/radio-group";
 import {
@@ -32,6 +31,7 @@ import {
 
 import countries from "@/shared/_utils/countries";
 import { openInfobar } from "@/stores/features/app-native-features/info-modal";
+import useExtractProfile from "@/hooks/extract-profile";
 const ScoutProfileSchema = z.object({
   first_name: z.string({
     message: "First name is required.",
@@ -53,18 +53,7 @@ const ScoutProfileSchema = z.object({
     message: "Organization type is required.",
   }),
 
-  photo: z
-    .any()
-    .refine((file: File) => file, "Logo is required")
-    .refine(
-      (file: File) => file?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    )
-    .refine(
-      (file: File) => ACCEPTED_FILE_TYPES.includes(file?.type),
-      "Only .jpeg, .jpg, .png, and .webp formats are supported."
-    )
-    .optional(),
+  photo: imageFileUpload,
 });
 
 type ScountProfileType = z.infer<typeof ScoutProfileSchema>;
@@ -72,6 +61,7 @@ type ScountProfileType = z.infer<typeof ScoutProfileSchema>;
 export default function UpdateScoutProfileForm() {
   const axios = useAxiosJson({ disableSuccMssg: false, disableErrMssg: false });
   const dispatch = useAppDispatch();
+  useExtractProfile();
   const { user } = useAppSelector((state) => state.auth.value);
   const [coordinates, setCoordinates] = useState<{
     latitude: number;
@@ -87,9 +77,34 @@ export default function UpdateScoutProfileForm() {
       purpose: "",
       club: "",
       organization_type: "",
-      photo: "",
+      photo: { preview: "/logo.jpg", file: null },
     },
   });
+
+  useEffect(() => {
+    if (user?.firstName) {
+      const {
+        phoneNumber,
+        profileImage,
+        firstName,
+        lastName,
+        country,
+        purpose,
+        organization_name,
+        organization_type,
+      } = user;
+      form.reset({
+        first_name: firstName,
+        last_name: lastName,
+        phone: String(Number(phoneNumber || +234)),
+        country: country,
+        purpose: purpose,
+        club: organization_name,
+        organization_type: organization_type,
+        photo: { preview: profileImage, file: null },
+      });
+    }
+  }, [user]);
 
   const handleSubmit = useCallback(
     (data: ScountProfileType) => {
@@ -125,7 +140,7 @@ export default function UpdateScoutProfileForm() {
             render={({ field: { onChange, onBlur, name, ref } }) => (
               <FormItem className="w-full flex gap-3 items-center">
                 <Image
-                  src={"/logo.png"}
+                  src={form.getValues("photo")?.preview || "/logo.jpg"}
                   alt="picture"
                   height={200}
                   width={200}
@@ -293,7 +308,7 @@ export default function UpdateScoutProfileForm() {
             render={({ field }) => (
               <FormItem className="w-full flex flex-col gap-1">
                 <FormLabel className="dark:text-dark-ash-900">
-                  Organizaiton/Club Name
+                  Organization/Club Name
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -346,7 +361,11 @@ export default function UpdateScoutProfileForm() {
           />
 
           <div className=" w-full text-center my-7 flex flex-col gap-2">
-            <Button type="submit" className=" flex items-center gap-2">
+            <Button
+              isLoading={form?.formState?.isSubmitting}
+              type="submit"
+              className=" flex items-center gap-2"
+            >
               Update
             </Button>
           </div>

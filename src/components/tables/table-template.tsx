@@ -88,7 +88,7 @@ export default function TableTemplate({
           {data?.length > 0 &&
             !isLoading &&
             data.map((item, index: number) => (
-              <TableRow key={item.id}>
+              <TableRow key={item._id}>
                 {columns.map((column, columnIndex) => (
                   <TableCell
                     className={column.cellClassName}

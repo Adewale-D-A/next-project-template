@@ -1,0 +1,136 @@
+{
+  "in_progress": [
+    {
+      "_id": "1",
+      "title": "Regional Youth League",
+      "category": "Senior - 7 Teams",
+      "date": "May 17 - Jun 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "Abia Stadium"
+    },
+    {
+      "_id": "2",
+      "title": "Senior League",
+      "category": "Senior - 7 Teams",
+      "date": "Apr 17 - Jul 20",
+      "status": "active",
+      "img": "/images/competition-logo-3.jpg",
+      "location": "Afro Stadium"
+    },
+    {
+      "_id": "3",
+      "title": "Prof League",
+      "category": "Senior - 16 Teams",
+      "date": "May 1 - May 20",
+      "status": "active",
+      "img": "/images/competition-logo-2.jpg",
+      "location": "National Stadium"
+    }
+  ],
+  "upcoming": [
+    {
+      "_id": "1",
+      "title": "Golden Champ Competition",
+      "category": "Senior - 12 Teams",
+      "date": "Aug 17 - Sept 20",
+      "status": "active",
+      "img": "/images/competition-logo-4.jpg",
+      "location": "Saheed Balogun Stadium"
+    },
+    {
+      "_id": "2",
+      "title": "ACE Senior League",
+      "category": "Senior - 11 Teams",
+      "date": "Jul 17 - Aug 20",
+      "status": "active",
+      "img": "/images/competition-logo-2.jpg",
+      "location": "Golden Stadium"
+    },
+    {
+      "_id": "3",
+      "title": "State League",
+      "category": "Senior - 9 Teams",
+      "date": "May 30 - Aug 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "Freedom Park Stadium"
+    },
+    {
+      "_id": "4",
+      "title": "Town League",
+      "category": "Senior - 11 Teams",
+      "date": "Aug 17 - Dec 20",
+      "status": "active",
+      "img": "/images/competition-logo-3.jpg",
+      "location": "Saheed Balogun Stadium"
+    }
+  ],
+  "completed": [
+    {
+      "_id": "1",
+      "title": "Big-Team League",
+      "category": "Senior - 5 Teams",
+      "date": "Apr 1 - Apr 30",
+      "status": "active",
+      "img": "/images/competition-logo-2.jpg",
+      "location": "Tradition Stadium"
+    },
+    {
+      "_id": "2",
+      "title": "Extra League",
+      "category": "Senior - 10 Teams",
+      "date": "Feb 17 - Mar 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    }
+  ],
+  "active_competitions": [
+    {
+      "_id": 1,
+      "title": "Regional Youth League",
+      "category": "Senior - 16 Teams",
+      "date": "Apr 17 - Jun 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    },
+    {
+      "_id": 2,
+      "title": "Regional Youth League",
+      "category": "Senior - 16 Teams",
+      "date": "Apr 17 - Jun 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    },
+    {
+      "_id": 3,
+      "title": "Nations Cup",
+      "category": "u-17 - 16 Teams",
+      "date": "Apr 17 - Jun 20",
+      "status": "active",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    },
+    {
+      "_id": 4,
+      "title": "Regional Youth League",
+      "category": "Senior - 16 Teams",
+      "date": "May 17 - Jun 20",
+      "status": "available",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    },
+    {
+      "_id": 5,
+      "title": "National Championship",
+      "category": "Senior - 36 Teams",
+      "date": "Mar 5 - May 25",
+      "status": "request-sent",
+      "img": "/images/competition-logo-1.jpg",
+      "location": "5000 Capacity Stadium"
+    }
+  ]
+}

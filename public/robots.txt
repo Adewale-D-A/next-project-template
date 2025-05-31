@@ -4,4 +4,4 @@ User-Agent: *
 Allow: /
 Disallow: /private/
 
-Sitemap: https://www.adewaleda.com/sitemap.xml
+Sitemap: https://www.adewaleda.space/sitemap.xml

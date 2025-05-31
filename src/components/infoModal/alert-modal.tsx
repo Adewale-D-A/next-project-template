@@ -35,7 +35,7 @@ const AlertModal = () => {
         <h4 className={`font-semibold text-3xl`}>
           {isError ? "Error" : "Success"}
         </h4>
-        <p className=" text-sm">{message}</p>
+        <p className=" text-sm text-center">{message}</p>
         <Button
           type="button"
           onClick={() => closeModal()}

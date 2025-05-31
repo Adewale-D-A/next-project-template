@@ -5,3 +5,18 @@ export const ACCEPTED_FILE_TYPES = [
   "image/png",
   "image/webp",
 ];
+
+export const ACCEPTED_FILE_TYPES_INPUT = [
+  {
+    name: "images",
+    values: "image/*",
+  },
+  {
+    name: "pdf",
+    values: "application/pdf",
+  },
+  {
+    name: "images/pdf",
+    values: "image/*,application/pdf",
+  },
+];

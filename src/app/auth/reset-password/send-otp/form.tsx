@@ -1,7 +1,7 @@
 "use client";
 
 import useAxiosJson from "@/config/services/axios-json-context";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/button";
@@ -39,12 +39,11 @@ export default function SendOTPForm() {
       email: "",
     },
   });
-  const [isSendingCode, setIsSendingCode] = useState(false);
   const sendOtp = useCallback(async (data: SendOtpType) => {
-    setIsSendingCode(true);
+    const { email } = data;
     try {
-      // const response = await axios.post("/auth/admin/forgot-password", {
-      //   email: data?.email,
+      // const response = await axios.post("/auth/forgot-password", {
+      //   email,
       // });
       // const { message } = response?.data;
       dispatch(
@@ -53,10 +52,8 @@ export default function SendOTPForm() {
           isError: false,
         })
       );
-      router.push(`/auth/reset-password/change-password?email=${data?.email}`);
-    } finally {
-      setIsSendingCode(false);
-    }
+      router.push(`/auth/reset-password/change-password?email=${email}`);
+    } catch (error) {}
   }, []);
 
   return (
@@ -92,7 +89,11 @@ export default function SendOTPForm() {
             )}
           />
           <div className=" w-full text-center my-4 flex flex-col gap-2">
-            <Button type="submit" className=" flex items-center gap-2">
+            <Button
+              isLoading={form?.formState?.isSubmitting}
+              type="submit"
+              className=" flex items-center gap-2"
+            >
               Send OTP <MoveRight />
             </Button>
           </div>

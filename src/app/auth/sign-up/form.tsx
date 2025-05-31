@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
@@ -15,10 +15,11 @@ import { Input } from "@/components/input/text-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/_shared/form/form";
 import { useRouter } from "next/navigation";
-import { MoveRight } from "lucide-react";
+import { MoveLeft, MoveRight } from "lucide-react";
 import { passwordSchema } from "@/lib/schema";
-import { useAppDispatch } from "@/hooks/store-hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/store-hooks";
 import { updateUser } from "@/stores/features/auth/auth";
+import { openInfobar } from "@/stores/features/app-native-features/info-modal";
 
 const SignUpSchema = z.object({
   email: z.string().email().min(1, {
@@ -33,26 +34,52 @@ type SignUpType = z.infer<typeof SignUpSchema>;
 export default function SignUpForm() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state?.auth?.value?.user);
   const form = useForm<SignUpType>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
       email: "",
       password: "",
+      confirm_password: "",
     },
   });
 
+  // Pre-fill form field incase of corrections
+  useEffect(() => {
+    if (user?.password) {
+      form?.reset({
+        email: user?.email,
+        password: user?.password,
+        confirm_password: user?.password,
+      });
+    }
+  }, [user]);
+  // Pre-fill form field incase of corrections
+
   const handleSubmit = useCallback((data: SignUpType) => {
-    dispatch(updateUser({ ...data }));
-    router.push("/auth/role");
+    const { password, confirm_password } = data;
+    if (password === confirm_password) {
+      dispatch(updateUser({ ...data }));
+      router.push("/auth/role");
+    } else {
+      dispatch(
+        openInfobar({ message: "Passwords do not match", isError: true })
+      );
+    }
   }, []);
 
   return (
     <div className=" w-full h-fit max-w-md rounded-md dark:bg-dark-ash-900 bg-white dark:text-white text-black p-8 flex flex-col gap-6">
-      <section>
-        <h1 className="text-3xl font-semibold">Welcome!</h1>
-        <p className="text-sm mt-1 dark:text-gray-400">
-          Let&apos;s get you started.
-        </p>
+      <section className=" flex flex-col gap-2">
+        <Link href={"/auth/sign-in"}>
+          <MoveLeft />
+        </Link>{" "}
+        <div>
+          <h1 className="text-3xl font-semibold">Welcome!</h1>
+          <p className="text-sm mt-1 dark:text-gray-400">
+            Let&apos;s get you started.
+          </p>
+        </div>
       </section>
       <Form {...form}>
         <form
@@ -115,7 +142,11 @@ export default function SignUpForm() {
             )}
           />
           <div className=" w-full text-center my-4 flex flex-col gap-2">
-            <Button type="submit" className=" flex items-center gap-2">
+            <Button
+              type="submit"
+              isLoading={form?.formState?.isSubmitting}
+              className=" flex items-center gap-2"
+            >
               Get Started <MoveRight />
             </Button>
             <span className=" dark:text-gray-400 text-gray-500">

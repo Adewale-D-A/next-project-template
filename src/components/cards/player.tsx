@@ -1,39 +1,56 @@
+"use client";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import ViewPlayer from "@/app/dashboard/club/players-management/view-player";
+import { useState } from "react";
+import { Button } from "../button";
+import { Player } from "@/types/player";
 
 export default function PlayerCard({
-  first_name,
-  last_name,
-  position,
-  rating,
-  profile_image,
+  player,
+  usertype = "club",
 }: {
-  first_name: string;
-  last_name: string;
-  position: string;
-  rating: string;
-  profile_image: string;
+  player: Player;
+  usertype?: "club" | "scout";
 }) {
+  const [view, setView] = useState(false);
+  const handleOpenView = () => {
+    setView(true);
+  };
   return (
-    <div className=" rounded-lg bg-gray-100 p-4 flex justify-between items-start hover:scale-110 transition-all hover:cursor-pointer hover:bg-green-100">
-      <div className=" flex items-center gap-2">
-        <Image
-          src={profile_image}
-          alt="profile"
-          height={200}
-          width={200}
-          className=" h-16 w-16 rounded-full aspect-square"
-        />
-        <div>
-          <span className=" font-bold text-lg">
-            {first_name} {last_name}
-          </span>
-          <div className=" text-gray-500">
-            <span>{position}</span> <span>{rating}</span>
+    <>
+      <Button
+        variant={"unstyled"}
+        onClick={() => handleOpenView()}
+        className=" rounded-lg bg-gray-100 p-4 flex justify-between items-start hover:scale-105 transition-all hover:cursor-pointer hover:bg-green-100"
+      >
+        <div className=" flex items-center gap-2">
+          <Image
+            src={player?.profile_img || "/logo.jpg"}
+            alt="profile"
+            height={200}
+            width={200}
+            className=" h-16 w-16 rounded-full aspect-square"
+          />
+          <div>
+            <span className=" font-bold text-lg">
+              {player?.firstName} {player?.lastName}
+            </span>
+            <div className="text-left text-gray-500">
+              <span>{player?.position}</span> <span>{player?.ability}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <ArrowUpRight />
-    </div>
+        <ArrowUpRight />
+      </Button>
+      {view && (
+        <ViewPlayer
+          open={view}
+          onClose={setView}
+          id={player?._id}
+          usertype={usertype}
+        />
+      )}
+    </>
   );
 }

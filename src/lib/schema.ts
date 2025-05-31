@@ -1,5 +1,8 @@
 import { z } from "zod";
-
+import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from "@/config/system/constants";
+interface FileExtension extends File {
+  preview: string;
+}
 export const phoneNumberSchema = z
   .string()
   .trim()
@@ -16,3 +19,24 @@ export const passwordSchema = z
   .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
   .regex(/[0-9]/, "Password must contain at least one number");
 // .regex(/[@$!%*?&#]/, "Password must contain at least one special character");
+
+export const imageFileUpload = z
+  .any()
+  .refine(
+    (file: FileExtension) => file.name || file?.preview,
+    "Logo is required"
+  )
+  .refine(
+    (file: FileExtension) => file?.size <= MAX_FILE_SIZE || file?.preview,
+    `Max file size is 5MB.`
+  )
+  .refine(
+    (file: FileExtension) =>
+      ACCEPTED_FILE_TYPES.includes(file?.type) || file?.preview,
+    "Only .jpeg, .jpg, .png, and .webp formats are supported."
+  )
+  .optional();
+
+export const generateHexCode = () => {
+  return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+};

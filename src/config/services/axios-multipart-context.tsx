@@ -10,8 +10,8 @@ import { axiosMultipartInstance } from "./api-base";
 
 //axios instace interceptor for access token integration and refresh tokens
 const useAxiosMultipart = ({
-  disableSuccMssg,
-  disableErrMssg,
+  disableSuccMssg = true,
+  disableErrMssg = false,
 }: {
   disableSuccMssg?: boolean;
   disableErrMssg?: boolean;
@@ -32,7 +32,18 @@ const useAxiosMultipart = ({
       (error) => Promise.reject(error)
     );
     const responseIntercept = axiosMultipartInstance.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        const successMssg = response?.data?.message;
+        if (!disableSuccMssg) {
+          dispatch(
+            openInfobar({
+              message: successMssg || "Success",
+              isError: false,
+            })
+          );
+        }
+        return response;
+      },
       async (error) => {
         const originalRequest = error?.config;
         // ----log error message using snackbar---

@@ -12,7 +12,7 @@ export const authUser = createSlice({
     },
   },
   reducers: {
-    updatetAuthUser: (state, action) => {
+    updateAuthUser: (state, action) => {
       state.value.status = true;
       state.value.isLoggedIn = true;
       state.value.user = action.payload?.user;
@@ -34,7 +34,7 @@ export const authUser = createSlice({
   },
 });
 
-export const { updatetAuthUser, clearAuthUser, updateToken, updateUser } =
+export const { updateAuthUser, clearAuthUser, updateToken, updateUser } =
   authUser.actions;
 
 export default authUser.reducer;

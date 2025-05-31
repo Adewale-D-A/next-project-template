@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Button } from "@/components/button";
 import { Form } from "@/components/_shared/form/form";
 import {
@@ -45,20 +45,18 @@ export default function ChangePasswordForm() {
     },
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const changePassword = useCallback(
     async (data: ResetPasswordType) => {
       if (data?.password === data?.confirm_password) {
-        setIsSubmitting(true);
+        const { otp, password, confirm_password } = data;
         try {
-          // await axios.post("/auth/admin/reset-password", {
-          //   // token: data?.otp,
+          // await axios.post("/auth/reset-password", {
+          //   token: otp,
+          //   newPassword: password,
           //   // email: email,
-          //   password: data?.password,
-          //   password_confirmation: data?.confirm_password,
+          //   // password_confirmation: confirm_password,
           // });
-          console.log(email, data?.otp, data?.password);
+          // console.log(email, otp, password, confirm_password);
           dispatch(
             openInfobar({
               message:
@@ -67,10 +65,7 @@ export default function ChangePasswordForm() {
             })
           );
           router.push(`/auth/sign-in`);
-        } catch (error: any) {
-        } finally {
-          setIsSubmitting(false);
-        }
+        } catch (error: any) {}
       } else {
         dispatch(
           openInfobar({ message: "Passwords do not match", isError: true })
@@ -150,7 +145,11 @@ export default function ChangePasswordForm() {
             )}
           />
           <div className=" w-full text-center my-4 flex flex-col gap-2">
-            <Button type="submit" className=" flex items-center gap-2">
+            <Button
+              isLoading={form?.formState?.isSubmitting}
+              type="submit"
+              className=" flex items-center gap-2"
+            >
               Reset Password <MoveRight />
             </Button>
             {/* <span className=" dark:text-gray-400 text-gray-500">

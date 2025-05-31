@@ -2,7 +2,7 @@
 
 import useAxiosJson from "@/config/services/axios-json-context";
 import { useAppDispatch, useAppSelector } from "@/hooks/store-hooks";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { AutocompleteInput } from "@/components/input/autocompleteInput";
@@ -19,9 +19,10 @@ import { Input } from "@/components/input/text-input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/_shared/form/form";
 import FileInput from "@/components/input/file-input-w-button";
-import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from "@/config/system/constants";
-import { phoneNumberSchema } from "@/lib/schema";
+import { imageFileUpload, phoneNumberSchema } from "@/lib/schema";
 import { openInfobar } from "@/stores/features/app-native-features/info-modal";
+import useExtractProfile from "@/hooks/extract-profile";
+import Image from "next/image";
 
 const TeamProfileSchema = z.object({
   name: z.string({
@@ -31,18 +32,7 @@ const TeamProfileSchema = z.object({
     message: "Location is required.",
   }),
   phone: phoneNumberSchema,
-  logo: z
-    .any()
-    .refine((file: File) => file, "Logo is required")
-    .refine(
-      (file: File) => file?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    )
-    .refine(
-      (file: File) => ACCEPTED_FILE_TYPES.includes(file?.type),
-      "Only .jpeg, .jpg, .png, and .webp formats are supported."
-    )
-    .optional(),
+  logo: imageFileUpload,
 });
 
 type TeamProfileType = z.infer<typeof TeamProfileSchema>;
@@ -50,6 +40,7 @@ type TeamProfileType = z.infer<typeof TeamProfileSchema>;
 export default function UpdateClubProfileForm() {
   const axios = useAxiosJson({ disableSuccMssg: false, disableErrMssg: false });
   const dispatch = useAppDispatch();
+  useExtractProfile();
   const { user } = useAppSelector((state) => state.auth.value);
   const [coordinates, setCoordinates] = useState<{
     latitude: number;
@@ -62,9 +53,21 @@ export default function UpdateClubProfileForm() {
       name: "",
       location: "",
       phone: "",
-      logo: "",
+      logo: { preview: "/logo.jpg", file: null },
     },
   });
+
+  useEffect(() => {
+    if (user?.clubName) {
+      const { phoneNumber, profileImage, clubName, location } = user;
+      form.reset({
+        name: clubName,
+        location: location,
+        phone: String(Number(phoneNumber || +234)),
+        logo: { preview: profileImage, file: null },
+      });
+    }
+  }, [user]);
 
   const handleSubmit = useCallback(
     async (data: TeamProfileType) => {
@@ -179,6 +182,13 @@ export default function UpdateClubProfileForm() {
             name="logo"
             render={({ field: { onChange, onBlur, name, ref } }) => (
               <FormItem className="w-full flex flex-col gap-1">
+                <Image
+                  src={form.getValues("logo")?.preview || "/logo.jpg"}
+                  alt="picture"
+                  height={200}
+                  width={200}
+                  className=" h-20 w-20 rounded-full object-cover"
+                />
                 <FormLabel className="dark:text-dark-ash-900">
                   Club Logo
                 </FormLabel>

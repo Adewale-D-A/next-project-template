@@ -40,7 +40,7 @@ export default function Loader({
     return (
       <div
         className={cn(
-          "w-full min-h-60 rounded-md flex items-center justify-center bg-gray-100",
+          "w-full min-h-60 rounded-md flex flex-col gap-3 items-center justify-center dark:bg-dark-ash-500 bg-gray-100",
           className
         )}
         {...rest}

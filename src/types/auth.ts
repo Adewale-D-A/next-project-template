@@ -9,6 +9,13 @@ export interface AuthUser {
     _id: string;
     name: string;
   };
+  profileImage: string;
+  location: string;
+  clubName: string;
+  country: string;
+  purpose: string;
+  organization_name: string;
+  organization_type: string;
   password?: string;
   passwordResetToken?: string;
   passwordResetExpires?: string;

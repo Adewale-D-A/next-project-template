@@ -1,0 +1,44 @@
+{
+  "team_stats": {
+    "_id": "team_1",
+    "name": "Maximo FC",
+    "wins": {
+      "percentage": 45,
+      "count": 3
+    },
+    "goals_scored": 5,
+    "goals_conceded": 3,
+    "injuries": 2,
+    "games_count": 7
+  },
+  "player_competitions_stats": [
+    {
+      "id": "okay_1",
+      "competition": "Youth League",
+      "apps": "12",
+      "cs": "2",
+      "gc": "10",
+      "minutes": "402`"
+    },
+    {
+      "id": "okay_2",
+      "competition": "National League",
+      "apps": "12",
+      "cs": "2",
+      "gc": "10",
+      "minutes": "402`"
+    },
+    {
+      "id": "okay_3",
+      "competition": "Junior Cup",
+      "apps": "12",
+      "cs": "2",
+      "gc": "10",
+      "minutes": "402`"
+    }
+  ],
+  "watchlist_stats": {
+    "labels": ["Goalkeepers", "Defenders", "Midfields", "Attackers"],
+    "data": [4, 8, 10, 4]
+  }
+}

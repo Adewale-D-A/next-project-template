@@ -1,0 +1,466 @@
+{
+  "next_match": {
+    "_id": "match-_1212",
+    "club_1": {
+      "_id": "maximo_1",
+      "name": "MAXIMO FC",
+      "logo": "/images/football_club_logo.png"
+    },
+    "club_2": {
+      "_id": "kicks-12",
+      "name": "KICKERS FC",
+      "logo": "/images/kickers_club_logo.png"
+    },
+    "date": "Wednesday 19, March 2025",
+    "location": "Saheed Balogun Stadium"
+  },
+  "fixtures": [
+    {
+      "_id": "okay_1",
+      "date": "21/04",
+      "league": "H",
+      "status": "completed",
+      "location": "Saheed Balogun Stadium",
+      "score": {
+        "club_1": 1,
+        "club_2": 2
+      },
+      "club_1": {
+        "_id": "randmon-one-one",
+        "name": "Kikcers FC",
+        "logo": "/images/football_club_logo.png"
+      },
+      "club_2": {
+        "_id": "randmon-one-two",
+        "name": "ONE FC",
+        "logo": "/images/kickers_club_logo.png"
+      },
+      "isFormationSet": true
+    },
+    {
+      "_id": "okay_2",
+      "date": "21/05",
+      "league": "H",
+      "status": "in-progress",
+      "location": "Delta Fields",
+      "score": {
+        "club_1": 1,
+        "club_2": 0
+      },
+      "club_1": {
+        "_id": "randmon-two-one",
+        "name": "Bayelsa FC",
+        "logo": "/images/football_club_logo.png"
+      },
+      "club_2": {
+        "_id": "randmon-one-two",
+        "name": "Lagos FC",
+        "logo": "/images/kickers_club_logo.png"
+      },
+      "isFormationSet": true
+    },
+    {
+      "_id": "okay_3",
+      "date": "21/06",
+      "league": "H",
+      "status": "not-completed",
+      "location": "5000 Capacity Stadium",
+      "score": {
+        "club_1": 0,
+        "club_2": 0
+      },
+      "club_1": {
+        "_id": "randmon-one-one",
+        "name": "Youth FC",
+        "logo": "/images/football_club_logo.png"
+      },
+      "club_2": {
+        "_id": "randmon-two-two",
+        "name": "MAXIMO FC",
+        "logo": "/images/kickers_club_logo.png"
+      },
+      "isFormationSet": false
+    }
+  ],
+  "match_info": {
+    "date": "12 May, 2025",
+    "time": "14:30",
+    "location": "Teslim Balogun Stadium",
+    "fulltime": 98,
+    "club_1": {
+      "_id": "club_1",
+      "name": "Beau FC",
+      "score": 2
+    },
+    "club_2": {
+      "_id": "CLUB_2",
+      "name": "FC Lagos",
+      "score": 1
+    }
+  },
+  "match_summary": [
+    {
+      "_id": "1",
+      "minute": "9'",
+      "team": "Team A",
+      "team_id": "team_a",
+      "player": "A. Lookman",
+      "action": "score",
+      "score": "1-0"
+    },
+    {
+      "_id": "2",
+      "minute": "32'",
+      "team": "Team B",
+      "team_id": "team_b",
+      "player": "B. Cristante",
+      "action": "score",
+      "score": "1-1"
+    },
+    {
+      "_id": "3",
+      "minute": "HT",
+      "team": "",
+      "team_id": "",
+      "player": "",
+      "score": "1-1"
+    },
+    {
+      "_id": "4",
+      "minute": "76'",
+      "team": "Team A",
+      "team_id": "team_a",
+      "player": "I. Suleman",
+      "action": "score",
+      "score": "2-1"
+    },
+    {
+      "_id": "5",
+      "minute": "88'",
+      "team": "Team B",
+      "team_id": "team_a",
+      "player": "B. Djimsti",
+      "action": "yellow-card",
+      "score": "2-1"
+    },
+    {
+      "_id": "6",
+      "minute": "90'",
+      "team": "Team B",
+      "team_id": "team_b",
+      "player": "Eric B.",
+      "action": "red-card",
+      "score": "2-1"
+    },
+    {
+      "_id": "7",
+      "minute": "FT",
+      "team": "",
+      "team_id": "",
+      "player": "",
+      "score": "2-1"
+    }
+  ],
+  "match_lineup": {
+    "team_1": {
+      "team": "team_a",
+      "team_id": "team_a_id",
+      "keeper": {
+        "count": 1,
+        "details": [
+          {
+            "name": "Marco Carnesecchi",
+            "position": "Goalkeeper",
+            "jerseyNumber": 1,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "defenders": {
+        "count": 3,
+        "details": [
+          {
+            "name": "Odilon Kossounou",
+            "position": "Defender",
+            "jerseyNumber": 3,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Berat Djimsiti",
+            "position": "Defender",
+            "jerseyNumber": 19,
+            "isSubstituted": false,
+            "isYellowCard": true,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Marten De Roon",
+            "position": "Defender",
+            "jerseyNumber": 15,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "mid_fielders": {
+        "count": 4,
+        "details": [
+          {
+            "name": "Raoul Bellanova",
+            "position": "Mid fielder",
+            "jerseyNumber": 16,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Mario Pasalic",
+            "position": "Mid fielder",
+            "jerseyNumber": 8,
+            "isSubstituted": false,
+            "isYellowCard": true,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Ederson",
+            "position": "Mid fielder",
+            "jerseyNumber": 13,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Davide Zappacosta",
+            "position": "Mid fielder",
+            "jerseyNumber": 77,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "forwards": {
+        "count": 3,
+        "details": [
+          {
+            "name": "Charles De Ketelaere",
+            "position": "Forwards",
+            "jerseyNumber": 17,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": true,
+            "isGoal": false
+          },
+          {
+            "name": "Mateo Retegui",
+            "position": "Forwards",
+            "jerseyNumber": 32,
+            "isSubstituted": true,
+            "isYellowCard": true,
+            "isRedCard": true,
+            "isGoal": true
+          },
+          {
+            "name": "Ademola Lookman",
+            "position": "Forwards",
+            "jerseyNumber": 11,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      }
+    },
+    "team_2": {
+      "team": "team_b",
+      "team_id": "team_b_id",
+      "keeper": {
+        "count": 1,
+        "details": [
+          {
+            "name": "Mile Svilar",
+            "position": "Goalkeeper",
+            "jerseyNumber": 99,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "defenders": {
+        "count": 3,
+        "details": [
+          {
+            "name": "Evan N'Dicka",
+            "position": "Defender",
+            "jerseyNumber": 5,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Gianluca Mancini",
+            "position": "Defender",
+            "jerseyNumber": 23,
+            "isSubstituted": false,
+            "isYellowCard": true,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Zeki Celik",
+            "position": "Defender",
+            "jerseyNumber": 19,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "mid_fielders": {
+        "count": 4,
+        "details": [
+          {
+            "name": "Angelino",
+            "position": "Mid fielder",
+            "jerseyNumber": 3,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Manu Kone",
+            "position": "Mid fielder",
+            "jerseyNumber": 17,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Bryan Cristante",
+            "position": "Mid fielder",
+            "jerseyNumber": 4,
+            "isSubstituted": false,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": true
+          },
+          {
+            "name": "Devyne Rensch",
+            "position": "Mid fielder",
+            "jerseyNumber": 2,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      },
+      "forwards": {
+        "count": 3,
+        "details": [
+          {
+            "name": "Artem Dovbyk",
+            "position": "Forwards",
+            "jerseyNumber": 11,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          },
+          {
+            "name": "Matias Soule",
+            "position": "Forwards",
+            "jerseyNumber": 18,
+            "isSubstituted": false,
+            "isYellowCard": true,
+            "isRedCard": false,
+            "isGoal": true
+          },
+          {
+            "name": "Eldor Shomurodov",
+            "position": "Forwards",
+            "jerseyNumber": 14,
+            "isSubstituted": true,
+            "isYellowCard": false,
+            "isRedCard": false,
+            "isGoal": false
+          }
+        ]
+      }
+    }
+  },
+  "match_lineup_substitutions": {
+    "team_1": {
+      "team": "team_a",
+      "team_id": "teams_21",
+      "substitutions": [
+        {
+          "minute": "10'",
+          "outgoing": "Raoul Bellanova",
+          "incoming": "Paul R'ovru, 06"
+        },
+        {
+          "minute": "43'",
+          "outgoing": "Charles De Ketelaere",
+          "incoming": "Yu Lno, 86"
+        },
+        {
+          "minute": "56'",
+          "outgoing": "Mateo Retegui",
+          "incoming": "Anthony James, 87"
+        },
+        {
+          "minute": "70'",
+          "outgoing": "Ademola Lookman",
+          "incoming": "Ro Orio, 07"
+        }
+      ]
+    },
+    "team_2": {
+      "team": "team_b",
+      "team_id": "teams_22",
+      "substitutions": [
+        {
+          "minute": "10'",
+          "outgoing": "Raoul Bellanova",
+          "incoming": "Paul R'ovru, 06"
+        },
+        {
+          "minute": "43'",
+          "outgoing": "Charles De Ketelaere",
+          "incoming": "Yu Lno, 86"
+        },
+        {
+          "minute": "56'",
+          "outgoing": "Mateo Retegui",
+          "incoming": "Anthony James, 87"
+        },
+        {
+          "minute": "70'",
+          "outgoing": "Ademola Lookman",
+          "incoming": "Ro Orio, 07"
+        }
+      ]
+    }
+  }
+}

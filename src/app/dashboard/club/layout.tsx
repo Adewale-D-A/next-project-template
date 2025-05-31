@@ -1,5 +1,10 @@
 import DashboardLayout from "@/components/dashboard-layout";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Your club's dashboard.",
+};
 export default function ClubDashboardLayout({
   children,
 }: {

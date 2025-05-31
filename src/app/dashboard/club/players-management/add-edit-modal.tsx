@@ -14,10 +14,10 @@ export default function AddEditPlayerModal({
     <ModalTemplate
       open={open}
       onClose={setOpen}
-      title={id ? "EDIT" : "ADD"}
+      title={id ? "EDIT PLAYER" : "ADD PLAYER"}
       className=" max-w-4xl"
     >
-      <AddEditPlayerForm setOpen={setOpen} />
+      <AddEditPlayerForm setOpen={setOpen} id={id} />
     </ModalTemplate>
   );
 }

@@ -53,9 +53,9 @@ export const playersListData = createSlice({
       }
     },
     removePlayerInList: (state, action) => {
-      const { id } = action?.payload;
+      const { _id } = action?.payload;
       const currentArray = [...state.value.data];
-      const currentIndex = currentArray.findIndex((v) => v.id === id);
+      const currentIndex = currentArray.findIndex((v) => v._id === _id);
       if (currentIndex >= 0) {
         currentArray.splice(currentIndex, 1);
         state.value.data = currentArray;
@@ -64,7 +64,7 @@ export const playersListData = createSlice({
       const pagination_data = [...state.value.pagination];
       const removed = pagination_data.map((item, index) => {
         const sencondFilter = item.data.filter((data, i) => {
-          return !(data.id === id);
+          return !(data._id === _id);
         });
         return {
           pagination_data: { ...item.pagination_data },
@@ -74,19 +74,23 @@ export const playersListData = createSlice({
       state.value.pagination = removed;
     },
     replacePlayerInList: (state, action) => {
-      const { id } = action?.payload;
+      const { _id } = action?.payload;
       const currentArray = state.value.data;
-      const currentIndex = currentArray.findIndex((v) => v.id === id);
+      const currentIndex = currentArray.findIndex((v) => v._id === _id);
       if (currentIndex >= 0) {
-        currentArray.splice(currentIndex, 1, action?.payload);
+        const currentDataset = currentArray[currentIndex];
+        currentArray.splice(currentIndex, 1, {
+          ...currentDataset,
+          ...action?.payload,
+        });
         state.value.data = currentArray;
       }
       //REPLACE pagination data
       const pagination_data = [...state.value.pagination];
-      const replacedItem = pagination_data.map((item, index) => {
-        const sencondFilter = item.data.map((data, i) => {
-          if (data.id === id) {
-            return { ...action.payload };
+      const replacedItem = pagination_data.map((item) => {
+        const sencondFilter = item.data.map((data) => {
+          if (data._id === _id) {
+            return { ...data, ...action.payload };
           } else {
             return data;
           }
